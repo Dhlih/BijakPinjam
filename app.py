@@ -91,9 +91,22 @@ st.caption(
 
 def tampilkan_hasil(data, pendapatan, pengeluaran):
 
-    st.divider()
+    st.markdown(
+    """
+    <style>
+    [data-testid="stMetricLabel"] {
+        color: #2c3e50 !important;
+    }
+    [data-testid="stMetricValue"] {
+        color: #1e293b !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-    col1,col2,col3,col4 = st.columns(4)
+    # 2. Kode metric milikmu
+    col1, col2, col3, col4 = st.columns(4)
 
     col1.metric(
         "💸 Cicilan Bulanan",
@@ -124,25 +137,16 @@ def tampilkan_hasil(data, pendapatan, pengeluaran):
         gauge = go.Figure(
             go.Indicator(
                 mode="gauge+number",
-                value=float(data["risk_score"]),
+                value=data["risk_score"],
                 number={"suffix":"%"},
                 title={"text":"Risk Score"},
                 gauge={
                     "axis":{"range":[0,100]},
                     "bar":{"color":"royalblue"},
                     "steps":[
-                        {
-                            "range":[0,30],
-                            "color":"#DCFCE7"
-                        },
-                        {
-                            "range":[30,60],
-                            "color":"#FEF3C7"
-                        },
-                        {
-                            "range":[60,100],
-                            "color":"#FEE2E2"
-                        }
+                        {"range":[0,40], "color":"#4ADE80"},  # Hijau Daun
+                        {"range":[40,70], "color":"#FACC15"}, # Kuning Kunyit
+                        {"range":[70,100], "color":"#F87171"} # Merah Stroberi
                     ]
                 }
             )
@@ -161,19 +165,19 @@ def tampilkan_hasil(data, pendapatan, pengeluaran):
         if data["risk_level"] == "Bahaya":
 
             st.error(
-                f"🚨 Risiko Tinggi ({data['risk_score']:.1f}%)"
+                f"🚨 Risiko Tinggi ({data['risk_score']:.2f}%)"
             )
 
         elif data["risk_level"] == "Waspada":
 
             st.warning(
-                f"⚠️ Risiko Sedang ({data['risk_score']}%)"
+                f"⚠️ Risiko Sedang ({data['risk_score']:.2f}%)"
             )
 
         else:
 
             st.success(
-                f"✅ Risiko Rendah ({data['risk_score']}%)"
+                f"✅ Risiko Rendah ({data['risk_score']:.2f}%)"
             )
 
     with kanan:
@@ -347,12 +351,16 @@ if menu == "Belum Pinjam":
             step=100000
         )
 
+        st.caption(f"Format Rupiah: **Rp {pendapatan:,.0f}**".replace(",", "."))
+
         pengeluaran = st.number_input(
             "Pengeluaran Bulanan (Rp)",
             min_value=0,
             value=3000000,
             step=100000
         )
+
+        st.caption(f"Format Rupiah: **Rp {pengeluaran:,.0f}**".replace(",", "."))
 
         pekerjaan = st.selectbox(
             "Status Pekerjaan",
@@ -372,6 +380,8 @@ if menu == "Belum Pinjam":
             value=5000000,
             step=500000
         )
+
+        st.caption(f"Format Rupiah: **Rp {pinjaman:,.0f}**".replace(",", "."))
 
         tenor = st.selectbox(
             "Tenor (Bulan)",
