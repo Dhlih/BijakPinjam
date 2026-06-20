@@ -4,6 +4,10 @@
 
 BijakPinjam adalah aplikasi berbasis AI yang membantu pengguna mengevaluasi kelayakan pinjaman dan kesehatan finansial sebelum mengambil keputusan kredit. Sistem menggunakan Machine Learning untuk menghasilkan Credit Risk Score, Financial Health Score, serta rekomendasi finansial yang dapat membantu pengguna memahami dampak pinjaman terhadap kondisi keuangan mereka.
 
+Aplikasi dapat diakses secara online melalui:
+
+https://bijakpinjam.streamlit.app/
+
 ## Setup Environment
 
 ### 1. Clone Repository
@@ -45,9 +49,9 @@ pip install -r requirements.txt
 
 Model dan file preprocessing tersedia pada repository:
 
-- `machine_learning/model_risiko_pinjaman_xgb.pkl`
-- `machine_learning/scaler_finansial.joblib`
-- `models/encoder_status_pekerjaan.joblib`
+* `machine_learning/model_risiko_pinjaman_xgb.pkl`
+* `machine_learning/scaler_finansial.joblib`
+* `models/encoder_status_pekerjaan.joblib`
 
 Jika diperlukan, model juga dapat diunduh melalui Google Drive berikut:
 
@@ -56,6 +60,14 @@ https://drive.google.com/file/d/1GDOYmUJqxZjcOxiBx_yoshq6qOHqkkJW/view?usp=shari
 ```
 
 ## Cara Menjalankan Aplikasi
+
+### Opsi 1: Menggunakan Versi Online
+
+Aplikasi dapat langsung digunakan melalui:
+
+https://bijakpinjam.streamlit.app/
+
+### Opsi 2: Menjalankan Secara Lokal
 
 Jalankan aplikasi Streamlit dengan perintah berikut:
 
